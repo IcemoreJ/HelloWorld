@@ -13,9 +13,6 @@ namespace PCITC.OA.UI.Portal.Controllers
 {
     public class HomeController : Controller
     {
-
-        //哈哈
-
         //IUserInfoServer userServer = new UserInfoServer();
         public IUserInfoServer UserInfoServer { set; get; }
         //该项应该再另建一个Controller的类里面写入，此处为方便不另建Controller而写在该地方以通过调试
