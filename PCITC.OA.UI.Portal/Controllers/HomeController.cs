@@ -55,6 +55,66 @@ namespace PCITC.OA.UI.Portal.Controllers
             return View();
         }
 
+        public ActionResult Details(int id = 0)
+        {
+            var obj = UserInfoServer.GetById(id);
+            if (obj == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(obj);
+        }
+
+        public ActionResult Delete(int id = 0)
+        {
+            var obj = UserInfoServer.GetById(id);
+
+            if (obj == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(obj);
+        }
+        [HttpPost,ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteInfo(UserInfo user)
+        {
+            bool flag = UserInfoServer.Delete(user);
+            if (flag == false)
+            {
+                return HttpNotFound();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id = 0)
+        {
+            var obj = UserInfoServer.GetById(id);
+
+            if (obj == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(UserInfo user)
+        {
+            bool flag = UserInfoServer.Updata(user);
+
+            if (flag == false)
+            {
+                return HttpNotFound();
+            }
+
+            return RedirectToAction("Index");
+        }
+
         #region 
         //[HttpPost]
         //public ActionResult NotExitesUserName()
