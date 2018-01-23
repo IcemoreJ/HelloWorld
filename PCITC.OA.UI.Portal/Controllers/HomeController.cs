@@ -77,7 +77,7 @@ namespace PCITC.OA.UI.Portal.Controllers
 
             return View(obj);
         }
-        [HttpPost,ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteInfo(UserInfo user)
         {
