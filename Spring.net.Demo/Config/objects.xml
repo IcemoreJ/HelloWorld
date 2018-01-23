@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <description>An  example that demonstrates simple IoC features.</description>
+  <object name="UserInfo" type="Spring.net.Demo.Models.UserInfo, Spring.net.Demo">
+    <constructor-arg index="0" value="张三"/>
+    <constructor-arg index="1" ref="Order"/>
+  </object>
+  <object name="Order" type="Spring.net.Demo.Models.Order, Spring.net.Demo">
+    <property name="OrderNo" value="201801212309"/>
+  </object>
+</objects>
+  
+

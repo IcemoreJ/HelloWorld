@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+  <object name="DbSession" type="PCITC.OA.DalFactory.DbSessionFactory, PCITC.OA.DalFactory" factory-method="GetCurrentDbSession" >
+  </object>
+  <object name="UserInfoDal" type="PCITC.OA.Dal.UserInfoDal, PCITC.OA.Dal" singleton="false" >
+  </object>
+    <object name="OrderDal" type="PCITC.OA.Dal.OrderDal, PCITC.OA.Dal" singleton="false" >
+  </object>
+</objects>
+

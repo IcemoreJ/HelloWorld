@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+  <object name="UserInfoServer" type="PCITC.OA.Bll.UserInfoServer, PCITC.OA.Bll" singleton="false" >
+    <property name="DbSession" ref="DbSession"/>
+    <property name="currentDal" ref="UserInfoDal"/>
+  </object>
+  
+  <object name="OrderServer" type="PCITC.OA.Bll.OrderServer, PCITC.OA.Bll" singleton="false" >
+    <property name="DbSession" ref="DbSession"/>
+    <property name="currentDal" ref="OrderDal"/>
+  </object>
+  
+  <!--intentionally do NOT register the AccountController or the ValuesController with the container; demonstrates that the underlying
+  default controller factory will properly (attempt to!) resolve all controllers not registered with Spring.NET
+  using its default controller resolution behavoir-->
+  <!--<object type="Spring.Mvc4QuickStart.Controllers.AccountController, Spring.Mvc4QuickStart" singleton="false" />-->
+  <!--<object type="Spring.Mvc4QuickStart.Controllers.ValuesController, Spring.Mvc4QuickStart" singleton="false" />-->
+</objects>
