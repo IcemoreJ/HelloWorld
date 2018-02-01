@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace PCITC.OA.Model
 {
-    public partial class UserInfo
+    [Serializable]
+    public class UserInfo
     {
         [Key]
         public int Id { get; set; }

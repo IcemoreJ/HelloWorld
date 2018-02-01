@@ -61,12 +61,12 @@ namespace PCITC.OA.Common
             memcachedClient = mc;
         }
         
-        public void Add(string key, string value)
+        public void Add(string key, object value)
         {
             memcachedClient.Add(key, value);
         }
 
-        public void Add(string key, string value, DateTime time)
+        public void Add(string key, object value, DateTime time)
         {
             memcachedClient.Add(key, value, time);
         }
@@ -81,7 +81,7 @@ namespace PCITC.OA.Common
             return memcachedClient.Get(key);
         }
 
-        public void Set(string key, string value, DateTime time)
+        public void Set(string key, object value, DateTime time)
         {
             memcachedClient.Set(key, value, time);
         }

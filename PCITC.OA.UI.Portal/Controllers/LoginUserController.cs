@@ -47,11 +47,13 @@ namespace PCITC.OA.UI.Portal.Controllers
             {
                 return Content("NotPasswd");
             }
-            Session["UserInfo"] = new UserInfo { Name = name, Passwd = passwd };
+            //Session["UserInfo"] = new UserInfo { Name = name, Passwd = passwd };
             string UserGuid = new Guid().ToString();
-    
+            HttpCookie cookie = new HttpCookie("cookieName");
+            cookie.Value = UserGuid;
+            Response.Cookies.Add(cookie);
 
-            MyCache.Add(UserGuid, name);
+            MyCache.Add(UserGuid, user);
 
             return Content("Ok");
         }

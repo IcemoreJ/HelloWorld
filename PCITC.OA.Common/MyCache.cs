@@ -44,11 +44,11 @@ namespace PCITC.OA.Common
             BaseCache = ctx.GetObject("BaseCache") as IBaseCache; 
         }
 
-        public static void Add(string key, string value)
+        public static void Add(string key, object value)
         {
             BaseCache.Add(key, value);
         }
-        public static void Add(string key, string value, DateTime time)
+        public static void Add(string key, object value, DateTime time)
         {
             BaseCache.Add(key, value, time);
         }
@@ -60,7 +60,7 @@ namespace PCITC.OA.Common
         {
             BaseCache.Delete(key);
         }
-        public static void Set(string key, string value, DateTime time)
+        public static void Set(string key, object value, DateTime time)
         {
             BaseCache.Set(key, value, time);
         }

@@ -32,10 +32,10 @@ namespace PCITC.OA.Common
 {
     public interface IBaseCache
     {
-        void Add(string key, string value);
-        void Add(string key, string value, DateTime time);
+        void Add(string key, object value);
+        void Add(string key, object value, DateTime time);
         object Get(string key);
         void Delete(string key);
-        void Set(string key, string value, DateTime time);
+        void Set(string key, object value, DateTime time);
     }
 }

@@ -22,6 +22,7 @@
  * 描述:
  * 
  * ********************************************************************************************************/
+using PCITC.OA.Common;
 using PCITC.OA.IBll;
 using PCITC.OA.Model;
 using System;
@@ -36,7 +37,7 @@ namespace PCITC.OA.UI.Portal.Models
     public class MyActionFilterAttribute : ActionFilterAttribute
     {
         public IUserInfoServer UserInfoServer { set; get; }
-
+        public UserInfo userInfo { set; get; }
         public bool Flag {
             set;
             get;
@@ -47,10 +48,16 @@ namespace PCITC.OA.UI.Portal.Models
             base.OnActionExecuting(filterContext);
             if (Flag == true)
             {
-                if (filterContext.HttpContext.Session["UserInfo"] == null)
+                string str = HttpContext.Current.Request.Cookies["cookieName"].Value;
+                userInfo = MyCache.Get(str) as UserInfo;
+
+                if (userInfo == null)
                 {
                     filterContext.HttpContext.Response.Redirect("/LoginUser/Index");
                 }
+
+                MyCache.Delete(str);
+                MyCache.Add(str, userInfo, DateTime.Now.AddMinutes(20));
             }
         }
     }
