@@ -1,16 +1,11 @@
-﻿using PCITC.OA.Bll;
-using PCITC.OA.DalFactory;
-using PCITC.OA.IBll;
-using PCITC.OA.IDal;
+﻿using PCITC.OA.IBll;
 using PCITC.OA.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PCITC.OA.UI.Portal.Controllers
 {
+
     public class HomeController : Controller
     {
         //IUserInfoServer userServer = new UserInfoServer();

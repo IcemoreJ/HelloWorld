@@ -10,6 +10,7 @@ namespace PCITC.OA.UI.Portal
         {
             //filters.Add(new HandleErrorAttribute());
             filters.Add(new MyExceptionFilterAttribute());
+            filters.Add(new MyActionFilterAttribute { Flag = true });
         }
     }
 }

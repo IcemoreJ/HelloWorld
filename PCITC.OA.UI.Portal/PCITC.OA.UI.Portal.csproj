@@ -187,13 +187,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MyActionFilterAttribute.cs" />
     <Compile Include="Models\MyExceptionFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\comman.xml" />
     <Content Include="Config\controllers.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -203,6 +206,19 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\images\20180125093342.jpg" />
+    <Content Include="Content\images\95.jpg" />
+    <Content Include="Content\images\96.jpg" />
+    <Content Include="Content\images\pic01_20140320.jpg" />
+    <Content Include="Content\images\Starry.jpg" />
+    <Content Include="Content\images\tp01_20140320.png" />
+    <Content Include="Content\images\tp02_20140320.png" />
+    <Content Include="Content\images\tp03_20140320.png" />
+    <Content Include="Content\images\tp04_20140320.png" />
+    <Content Include="Content\images\tp05_20140320.png" />
+    <Content Include="Content\images\tp06_20140320.png" />
+    <Content Include="Content\images\tp07_20140320.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -245,6 +261,7 @@
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\LoginUser\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

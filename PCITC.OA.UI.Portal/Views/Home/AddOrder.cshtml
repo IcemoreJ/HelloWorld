@@ -1,0 +1,52 @@
+﻿@model PCITC.OA.Model.Order
+@{
+    ViewBag.Title = "AddOrder";
+}
+
+@Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
+@Scripts.Render("~/Scripts/jquery.validate.min.js")
+@Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+
+<h2>AddOrder</h2>
+<script type="text/javascript">
+    function success(result)
+    {
+        alert("添加成功");
+    }
+</script>
+<fieldset>
+    <legend>Order</legend>
+    @using (Html.BeginForm("AddOrder", "Home", new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnSuccess = "success",
+        InsertionMode = InsertionMode.InsertAfter,
+        UpdateTargetId = "show"
+    }))
+    {
+        @Html.AntiForgeryToken()
+        //<input name="id" value=@ViewBag["Id"] hidden/>
+        @Html.HiddenFor(model => model.Id)
+    
+        <div class="display-lable">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="display-field">
+            @Html.EditorFor(model => model.Name)
+        </div>
+        <div class="display-lable">
+            @Html.DisplayNameFor(model => model.Detail)
+        </div>
+        <div class="display-field">
+            @Html.EditorFor(model => model.Detail)
+        </div>
+        <p>
+            <input type="submit" value="提交"/>
+            @Html.ActionLink("Bace to List", "Index");
+        </p>
+    }
+</fieldset>
+<div id="show">
+
+</div>
+

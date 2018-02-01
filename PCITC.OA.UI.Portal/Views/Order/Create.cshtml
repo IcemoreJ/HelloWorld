@@ -1,0 +1,33 @@
+﻿@using PCITC.OA.Model
+@model PCITC.OA.Model.Order
+
+@Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
+@Scripts.Render("~/Scripts/jquery.validate.min.js")
+@Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+
+@using (Html.BeginForm("Create", "Order", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <td>@Html.DisplayNameFor(u => u.Name)</td>
+            <td>
+                @Html.TextBoxFor(u => u.Name)
+                @*@Html.ValidationMessageFor(u => u.Name)*@
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(u => u.Detail)</td>
+            <td>
+                @Html.TextBoxFor(u => u.Detail)
+                @*@Html.ValidationMessageFor(u => u.Name)*@
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="注册" />
+            </td>
+        </tr>
+    </table>
+}
+

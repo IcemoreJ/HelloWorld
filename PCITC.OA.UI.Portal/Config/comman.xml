@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <object name="BaseCache"      type="PCITC.OA.Common.MemCache, PCITC.OA.Common" singleton="false">    </object>
+  <object type="PCITC.OA.Common.MyCache, PCITC.OA.Common" singleton="false">
+    <!-- using setter injection... -->
+    <property name="BaseCache" ref="BaseCache"/>
+  </object>
+</objects>
+

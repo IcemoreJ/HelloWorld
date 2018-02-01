@@ -17,6 +17,13 @@
              </td>
          </tr>
          <tr>
+             <td>@Html.DisplayNameFor(u => u.Passwd)</td>
+             <td>
+                 @Html.PasswordFor(u => u.Passwd)
+                 @*@Html.ValidationMessageFor(u => u.Name)*@
+             </td>
+         </tr>
+         <tr>
              <td>@Html.DisplayNameFor(u => u.Gender)</td>
              <td>
                  @Html.RadioButtonFor(u => u.Gender, "男")男
