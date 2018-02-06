@@ -6,7 +6,7 @@
   </object>
   
   <object type="PCITC.OA.UI.Portal.Controllers.HomeController, PCITC.OA.UI.Portal" singleton="false" >
-    <property name="OrderServer" ref="OrderServer" />
+    <property name="OrderInfoServer" ref="OrderInfoServer" />
   </object>
   
   <object type="PCITC.OA.UI.Portal.Controllers.LoginUserController, PCITC.OA.UI.Portal" singleton="false" >

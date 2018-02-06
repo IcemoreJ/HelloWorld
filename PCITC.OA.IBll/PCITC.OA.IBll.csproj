@@ -40,8 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IActionInfoServer.cs" />
     <Compile Include="IBaseServer.cs" />
-    <Compile Include="IOrderServer.cs" />
+    <Compile Include="IOrderInfoServer.cs" />
+    <Compile Include="IRoleInfoServer.cs" />
+    <Compile Include="IR_UserInfo_ActionInfoServer.cs" />
+    <Compile Include="IUserInfoExtServer.cs" />
     <Compile Include="IUserInfoServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

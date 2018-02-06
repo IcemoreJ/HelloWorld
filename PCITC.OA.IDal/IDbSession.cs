@@ -37,7 +37,7 @@ namespace PCITC.OA.IDal
             get;
         }
 
-        IOrderDal GetOrderDal
+        IOrderInfoDal GetOrderInfoDal
         {
             get;
         }

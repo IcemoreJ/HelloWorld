@@ -10,7 +10,7 @@ namespace PCITC.OA.UnitTest.PCITC.OA.Model
         [TestMethod]
         public void TestCRUD()
         {
-            using (DataModel db = new DataModel())
+            using (DataModelContainer db = new DataModelContainer())
             {
                 int r;
                 //UserInfo user = new UserInfo();
@@ -22,12 +22,11 @@ namespace PCITC.OA.UnitTest.PCITC.OA.Model
                 //r =  db.SaveChanges();
                 //Assert.AreEqual(true, r >= 1);
 
-                Order order = new Order();
-                Order order1 = new Order();
+                OrderInfo order = new OrderInfo();
+                OrderInfo order1 = new OrderInfo();
                 order.Id = 1;
                 order.Name = "IBMPC";
-                order.Detail = "IBM的游戏本";
-                db.Order.Add(order);
+                db.OrderInfo.Add(order);
                 r = db.SaveChanges();
                 //order1.Id = 2;
                 //order1.Name = "IPad";

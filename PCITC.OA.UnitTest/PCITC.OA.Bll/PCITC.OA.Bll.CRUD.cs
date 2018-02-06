@@ -18,10 +18,12 @@ namespace PCITC.OA.UnitTest.PCITC.OA.Bll
 
             UserInfo user = new UserInfo();
 
-            user.Name = "Jerry";
-            user.Gender = "雄性";
-            user.Phone = "000000";
-
+            user.UName = "Jerry";
+            user.ShowName = "大雄";
+            user.Remark = "000000";
+            user.Pwd = "123456";
+            user.Id = 1;
+            user.DelFlag = true;
             userServer.Add(user);
             Assert.AreEqual(true, dbSession.SaveChanges() >= 1);
         }

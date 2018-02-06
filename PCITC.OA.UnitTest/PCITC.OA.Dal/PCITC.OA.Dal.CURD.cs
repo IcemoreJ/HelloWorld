@@ -16,9 +16,12 @@ namespace PCITC.OA.UnitTest.PCITC.OA.Dal
 
             IUserInfoDal userDal = dbSession.GetUserInfoDal;
             UserInfo user = new UserInfo();
-            user.Name = "Tom";
-            user.Phone = "123456";
-            user.Gender = "雄性";
+            user.UName = "Jerry";
+            user.ShowName = "大雄";
+            user.Remark = "000000";
+            user.Pwd = "123456";
+            user.Id = 1;
+            user.DelFlag = true;
             #region 增加
             //userDal.Add(user);
             // Assert.AreEqual(true, dbSession.SaveChanges() >= 1);
@@ -28,7 +31,7 @@ namespace PCITC.OA.UnitTest.PCITC.OA.Dal
             //Assert.AreEqual(true, dbSession.SaveChanges() >= 1); 
             #endregion
             //修改
-            userDal.Updata(new UserInfo { Id = 3, Name = "Tom", Gender = "雄性", Phone = "000000" });
+            userDal.Updata(new UserInfo { Id = 3, UName = "Tom", ShowName = "大雄", Pwd = "000000" });
             Assert.AreEqual(true, dbSession.SaveChanges() >= 1);
         }
     }

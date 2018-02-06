@@ -43,8 +43,8 @@ namespace PCITC.OA.UnitTest.PCITC.OA.Model
             //} 
             #endregion
 
-            IDal.IOrderDal baseDal = new OrderDal();
-            Order order = baseDal.Add(new Order { Name = "橘子", Detail = "很好吃" });
+            IDal.IOrderInfoDal baseDal = new OrderInfoDal();
+            OrderInfo order = baseDal.Add(new OrderInfo { Name = "橘子" });
             //Assert.AreEqual(true, baseDal.Delete(order));
         }
     }

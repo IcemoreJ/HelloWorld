@@ -5,7 +5,7 @@
   </object>
   <object name="UserInfoDal" type="PCITC.OA.Dal.UserInfoDal, PCITC.OA.Dal" singleton="false" >
   </object>
-    <object name="OrderDal" type="PCITC.OA.Dal.OrderDal, PCITC.OA.Dal" singleton="false" >
+    <object name="OrderInfoDal" type="PCITC.OA.Dal.OrderInfoDal, PCITC.OA.Dal" singleton="false" >
   </object>
 </objects>
 

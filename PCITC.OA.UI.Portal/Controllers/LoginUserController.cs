@@ -15,7 +15,7 @@ namespace PCITC.OA.UI.Portal.Controllers
     {
         public IUserInfoServer UserInfoServer { set; get; }
         // GET: LoginUser
-        public ActionResult Index()
+        public ActionResult Index(UserInfo user)
         {
             return View();
         }
@@ -42,7 +42,8 @@ namespace PCITC.OA.UI.Portal.Controllers
             {
                 return Content("NotCode");
             }
-            var user = UserInfoServer.GetIQueryableBy(u => u.Name == name && u.Passwd == passwd).FirstOrDefault();
+            var user = UserInfoServer.GetIQueryableBy(u => u.UName == name && u.Pwd == passwd).FirstOrDefault();
+            
             if (user == null)
             {
                 return Content("NotPasswd");

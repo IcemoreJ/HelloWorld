@@ -24,9 +24,27 @@ namespace PCITC.OA.DalFactory
             return Assembly.Load(str).CreateInstance(str + ".UserInfoDal") as IUserInfoDal;
         }
 
-        public static IOrderDal GetOrderDal()
+        public static IOrderInfoDal GetOrderInfoDal()
         {
-            return Assembly.Load(str).CreateInstance(str + ".OrderDal") as IOrderDal;
+            return Assembly.Load(str).CreateInstance(str + ".OrderInfoDal") as IOrderInfoDal;
         }
+
+        public static IActionInfoDal GetActionInfoDal()
+        {
+            return Assembly.Load(str).CreateInstance(str + ".ActionInfoDal") as IActionInfoDal;
+        }
+        public static IR_UserInfo_ActionInfoDal GetR_UserInfo_ActionInfoDal()
+        {
+            return Assembly.Load(str).CreateInstance(str + ".R_UserInfo_ActionInfoDal") as IR_UserInfo_ActionInfoDal;
+        }
+        public static IRoleInfoDal GetRoleInfoDal()
+        {
+            return Assembly.Load(str).CreateInstance(str + ".RoleInfoDal") as IRoleInfoDal;
+        }
+        public static IUserInfoExtDal GetUserInfoExtDal()
+        {
+            return Assembly.Load(str).CreateInstance(str + ".UserInfoExtDal") as IUserInfoExtDal;
+        }
+        
     }
 }

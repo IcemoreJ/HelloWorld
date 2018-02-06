@@ -17,16 +17,28 @@ namespace PCITC.OA.Common
             //list.Add(new FileLog());
 
             ThreadPool.QueueUserWorkItem(o => {
-                lock (queue)
+                while (true)
                 {
-                    string str = queue.Dequeue();
-                    //foreach (IBaseLog item in list)
-                    //{    
-                    //    item.WriteLog(str);
-                    //}
-                    ILog log = LogManager.GetLogger("testLog");
-                    log.Error(str);
+                    if (queue.Count > 0)
+                    {
+                        lock (queue)
+                        {
+                            string str = queue.Dequeue();
+                            //foreach (IBaseLog item in list)
+                            //{    
+                            //    item.WriteLog(str);
+                            //}
+                            ILog log = LogManager.GetLogger("testLog");
+                            log.Error(str);
+                        }
+                    }
+                    else
+                    {
+                        Thread.Sleep(20);
+                    }
+                    
                 }
+                
             });
         }
         public static void WriteLog(string exception)

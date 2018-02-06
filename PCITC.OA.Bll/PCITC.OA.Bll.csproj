@@ -40,8 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionInfoServer.cs" />
     <Compile Include="BaseServer.cs" />
-    <Compile Include="OrderServer.cs" />
+    <Compile Include="OrderInfoServer.cs" />
+    <Compile Include="RoleInfoServer.cs" />
+    <Compile Include="R_UserInfo_ActionInfoServer.cs" />
+    <Compile Include="UserInfoExtServer.cs" />
     <Compile Include="UserInfoServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

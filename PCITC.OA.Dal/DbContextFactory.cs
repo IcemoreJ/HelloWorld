@@ -41,7 +41,7 @@ namespace PCITC.OA.Dal
 
             if (Db == null)
             {
-                Db = new DataModel();
+                Db = new DataModelContainer();
                 CallContext.SetData("DbContext", Db);
             }
 

@@ -41,10 +41,41 @@ namespace PCITC.OA.DalFactory
             }
         }
 
-        public IOrderDal GetOrderDal
+        public IOrderInfoDal GetOrderInfoDal
         {
             get{
-                return StaticDalFactory.GetOrderDal();
+                return StaticDalFactory.GetOrderInfoDal();
+            }
+        }
+
+        public IActionInfoDal GetActionInfoDal
+        {
+            get
+            {
+                return StaticDalFactory.GetActionInfoDal();
+            }
+        }
+
+        public IR_UserInfo_ActionInfoDal GetR_UserInfo_ActionInfoDal
+        {
+            get
+            {
+                return StaticDalFactory.GetR_UserInfo_ActionInfoDal();
+            }
+        }
+        public IRoleInfoDal GetRoleInfoDal
+        {
+            get
+            {
+                return StaticDalFactory.GetRoleInfoDal();
+            }
+        }
+
+        public IUserInfoExtDal GetUserInfoExtDal
+        {
+            get
+            {
+                return StaticDalFactory.GetUserInfoExtDal();
             }
         }
 

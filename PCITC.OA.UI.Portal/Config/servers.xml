@@ -6,9 +6,9 @@
     <property name="currentDal" ref="UserInfoDal"/>
   </object>
   
-  <object name="OrderServer" type="PCITC.OA.Bll.OrderServer, PCITC.OA.Bll" singleton="false" >
+  <object name="OrderInfoServer" type="PCITC.OA.Bll.OrderInfoServer, PCITC.OA.Bll" singleton="false" >
     <property name="DbSession" ref="DbSession"/>
-    <property name="currentDal" ref="OrderDal"/>
+    <property name="currentDal" ref="OrderInfoDal"/>
   </object>
   
   <!--intentionally do NOT register the AccountController or the ValuesController with the container; demonstrates that the underlying

@@ -71,19 +71,40 @@ namespace PCITC.OA.Bll
 
         public bool Updata(T entity)
         {
-            bool flag = currentDal.Updata(entity);
-            DbSession.SaveChanges();
-            return flag;
+            currentDal.Updata(entity);
+            int count = DbSession.SaveChanges();
+            return count > 0;
+        }
+
+        public bool Updata(List<int> ids)
+        {
+            foreach (var item in ids)
+            {
+                currentDal.Updata(item);
+            }
+
+            int count = DbSession.SaveChanges();
+
+            return count > 0;
         }
 
         public bool Delete(T entity)
         {
-            bool flag = currentDal.Delete(entity);
-            DbSession.SaveChanges();
-            return flag;
+            currentDal.Delete(entity);
+            int count = DbSession.SaveChanges();
+            return count > 0;
         }
 
+        public bool Delete(List<int> ids)
+        {
+            foreach (var item in ids)
+            {
+                currentDal.Delete(item);
+            }
 
+            int count = DbSession.SaveChanges();
+            return count > 0;
+        }
 
         public T Add(T entity)
         {
@@ -103,7 +124,7 @@ namespace PCITC.OA.Bll
         /// <param name="where"></param>
         /// <param name="orderBy">排序的类型</param>
         /// <returns></returns>
-        public List<T> GetPageList<TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> orderBy)
+        public IQueryable<T> GetPageList<TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> orderBy)
         {
             return currentDal.GetPageList<TKey>(pageIndex, pageSize, where, orderBy);
         }

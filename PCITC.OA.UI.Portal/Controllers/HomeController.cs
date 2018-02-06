@@ -1,22 +1,35 @@
 ﻿using PCITC.OA.IBll;
 using PCITC.OA.Model;
+using PCITC.OA.UI.Portal.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace PCITC.OA.UI.Portal.Controllers
 {
-
+    [MyActionFilter(Flag = false)]
     public class HomeController : Controller
     {
         //IUserInfoServer userServer = new UserInfoServer();
         public IUserInfoServer UserInfoServer { set; get; }
         //该项应该再另建一个Controller的类里面写入，此处为方便不另建Controller而写在该地方以通过调试
-        public IOrderServer OrderServer { set; get; }
+        public IOrderInfoServer OrderInfoServer { set; get; }
         //IDbSession dbSession = DbSessionFactory.GetCurrentDbSession();
         public ActionResult Index()
         {
-            List<UserInfo> list = UserInfoServer.GetAll();
-            return View(list);
+            return View();
+        }
+        [HttpPost]
+        public ActionResult UserInfoToJson(string rows, string page)
+        {
+            int pageSize = int.Parse(Request["rows"] == null ? "10" : Request["rows"]);
+            int pageIndex = int.Parse(Request["page"] == null ? "1" : Request["page"]);
+            var pageData = UserInfoServer.GetPageList(pageIndex, pageSize, u => u.Id >= 0, u => u.Id).Select(u => new { u.Id, u.UName, u.Pwd, u.ShowName, u.Remark, u.DelFlag }).ToList();
+            int total = UserInfoServer.GetAll().Count;
+
+            //var pageData = UserInfoServer.GetPageList(pageIndex, pageSize, u => u.Id >= 0, u => u.Id).Select(u => new { u.Id, u.UName, u.Pwd, u.ShowName, u.Remark, u.DelFlag });
+            var data = new {total = total, rows = pageData.ToList() };
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About()
@@ -33,21 +46,16 @@ namespace PCITC.OA.UI.Portal.Controllers
             return View();
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(UserInfo user)
         {
             if (ModelState.IsValid)
             {
                 UserInfoServer.Add(user);
-                return RedirectToAction("Index");
+                return Content("OK");
             }
 
-            return View();
+            return Content("NOOK");
         }
 
         public ActionResult Details(int id = 0)
@@ -60,30 +68,39 @@ namespace PCITC.OA.UI.Portal.Controllers
 
             return View(obj);
         }
-
-        public ActionResult Delete(int id = 0)
+        [HttpPost]
+        public ActionResult Delete(string idlist)
         {
-            var obj = UserInfoServer.GetById(id);
-
-            if (obj == null)
+            string[] str = idlist.Split(',');
+            List<int> list = new List<int>();
+            foreach (var item in str)
             {
-                return HttpNotFound();
+                list.Add(int.Parse(item));
             }
 
-            return View(obj);
-        }
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteInfo(UserInfo user)
-        {
-            bool flag = UserInfoServer.Delete(user);
-            if (flag == false)
-            {
-                return HttpNotFound();
-            }
+            bool flag = UserInfoServer.Delete(list);
 
-            return RedirectToAction("Index");
+            if (flag)
+            {
+                return Content("OK");
+            }
+            else
+            {
+                return Content("NOOK");
+            }
         }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteInfo(UserInfo user)
+        //{
+        //    bool flag = UserInfoServer.Delete(user);
+        //    if (flag == false)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    return RedirectToAction("Index");
+        //}
 
         public ActionResult Edit(int id = 0)
         {

@@ -1,30 +1,156 @@
-﻿@model IEnumerable<PCITC.OA.Model.UserInfo>
-@using PCITC.OA.Model
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Client Side Pagination in DataGrid - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="/Content/jquery-easyui-1.4/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/Content/jquery-easyui-1.4/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="/Content/jquery-easyui-1.4/demo/demo.css">
+    <script type="text/javascript" src="/Content/jquery-easyui-1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/Content/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+</head>
+<body>
+    <h2>DataGrid with Toolbar</h2>
+    <p>Put buttons on top toolbar of DataGrid.</p>
+    <div style="margin:20px 0;"></div>
+    <h1>DataGrid</h1>
+    <table id="dg" style="width:600px;height:250px" iconCls="icon-edit"></table>
+    <script type="text/javascript">
+        function ShowDataGrid() {
+            $('#dg').datagrid({
+                url: '/Home/UserInfoToJson',
+                width: 700,
+                height: 400,
+                fitColumns: true,
+                idField: 'Id',
+                loadMsg: '正在加载...',
+                singleSelect: false,
+                pageSize: 10,
+                pageIndex: 1,
+                pageList: [10, 20, 30],
+                queryParams: {},
+                pagination: true,
+                method: 'post',
+                checkOnSelect: true,
+                minimizable: true,
+                maximizable: true,
+                closable: true,
+                rownumbers: true,
+                columns: [[
+                    { field: 'ck', width: 100, checkbox: true },
+                    { field: 'Id', title: 'Id', width: 100 },
+                    { field: 'UName', title: 'UName', width: 100 },
+                    { field: 'Pwd', title: 'Pwd', width: 100 },
+                    { field: 'ShowName', title: 'ShowName', width: 100, align: 'right' },
+                    { field: 'DelFlag', title: 'DelFlag', width: 100 },
+                    { field: 'Remark', title: 'Remark', width: 100 },
+                ]],
+                toolbar: [{
+                    iconCls: 'icon-add',
+                    handler: function () { $('#w').window('open') }
+                }, '-', {
+                    iconCls: 'icon-edit',
+                    handler: function () { alert('帮助按钮') }
+                }, '-', {
+                    iconCls: 'icon-save',
+                    handler: function () { alert('帮助按钮') }
+                }, '-', {
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        var Rows = $('#dg').datagrid('getSelections');
+                        if (Rows.length <= 0)
+                        {
+                            $.messager.alert('警告', '请选择要删除的行', 'warning');
+                            return;
+                        }
+                        var ids = '';
+                        for (var key in Rows)
+                        {
+                            ids = ids + Rows[key].Id + ',';
+                        }
 
-<p>@Html.ActionLink("Create New", "Create")</p>
+                        var idlist = ids.substr(0, ids.length - 1);
+                        $.post('/Home/Delete', { idlist: idlist }, function (result) {
+                            if (result == "OK") {
+                                window.location.href = '/Home/Index';
+                            } else {
+                                $.messager.alert('警告', '删除失败', 'warning');
+                            }
+                        })
+                    }
+                }],
 
-<table>
-    <tr>
-        <th>编号</th>
-        <th>姓名</th>
-        <th>密码</th>
-        <th>性别</th>
-        <th>电话</th>
-        <th></th>
-    </tr>
-    @foreach (UserInfo item in Model.ToList())
-    {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.Name</td>
-            <td>@item.Passwd</td>
-            <td>@item.Gender</td>
-            <td>@item.Phone</td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id})
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
-            </td>
-        </tr>
-    }
-</table>
+            });
+        }
+        function clearForm() {
+            $('#ff').form('clear');
+        }
+
+        function submitForm() {
+            $('#ff').form('submit', {
+                url: '/Home/Create',
+                onSubmit: function(){
+                    var isValid = $(this).form('validate');
+                    if (!isValid){
+                        $.messager.progress('close');	// 如果表单是无效的则隐藏进度条
+                    }
+                    return isValid;	// 返回false终止表单提交
+                },
+                success: function (result) {
+                    $.messager.progress('close');	// 如果提交成功则隐藏进度条
+                    if (result == "OK")
+                    {
+                        $('#w').panel('close');
+                        window.location.href = '/Home/Index';
+                    } else if (result == "NOOK") {
+                        $.messager.alert('警告', '添加失败', 'warning');
+                    } else {
+                        $.messager.alert('警告', '严重错误', 'error');
+                    }
+                }
+            });
+        }
+
+
+        $(function () {
+            ShowDataGrid();
+        })
+    </script>
+    <div id="w" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save',tools:'#tt'" style="width:600px;height:400px;padding:10px;">
+        <div style="padding:10px 60px 20px 60px">
+            <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
+                <table cellpadding="5">
+                    @*<tr>
+                        <td>用户Id:</td>
+                        <td><input class="easyui-numberbox" type="text" name="Id" data-options="min:0"></input></td>
+                    </tr>*@
+                    <tr>
+                        <td>用户名:</td>
+                        <td><input class="easyui-textbox" type="text" name="UName" data-options="required:true"></input></td>
+                    </tr>
+                    <tr>
+                        <td>密码:</td>
+                        <td><input class="easyui-textbox" type="password" name="Pwd" data-options="required:true"></input></td>
+                    </tr>
+                    <tr>
+                        <td>昵称:</td>
+                        <td><input class="easyui-textbox" type="text" name="ShowName" data-options="required:true"></input></td>
+                    </tr>
+                    <tr>
+                        <td>有效位:</td>
+                        <td><input class="easyui-textbox" type="text" name="DelFlag" data-options="readonly:true" value="true"></input></td>
+                    </tr>
+                    <tr>
+                        <td>备注:</td>
+                        <td><input class="easyui-textbox" name="Remark" data-options="multiline:true" style="height:60px"></input></td>
+                    </tr>
+                </table>
+                <div style="padding:5px">
+                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">Submit</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
+                </div>
+            </form>
+           </div>
+        </div>
+</body>
+</html>

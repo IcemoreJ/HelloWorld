@@ -56,11 +56,25 @@ namespace PCITC.OA.Dal
 
             return true;
         }
-
+        public bool Updata(int id)
+        {
+            T t = Db.Set<T>().Find(id);
+            Db.Entry(t).Property("DelFlag").CurrentValue = false;
+            Db.Entry(t).Property("DelFlag").IsModified = true;
+            return true;
+        }
         public bool Delete(T entity)
         {
             Db.Set<T>().Attach(entity);
             Db.Set<T>().Remove(entity);
+            return true;
+        }
+
+        public bool Delete(int id)
+        {
+            T t = Db.Set<T>().Find(id);
+            Db.Set<T>().Attach(t);
+            Db.Set<T>().Remove(t);
             return true;
         }
 
@@ -90,9 +104,9 @@ namespace PCITC.OA.Dal
         /// <param name="where"></param>
         /// <param name="orderBy">排序的类型</param>
         /// <returns></returns>
-        public List<T> GetPageList<TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> orderBy)
+        public IQueryable<T> GetPageList<TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> orderBy)
         {
-            return Db.Set<T>().Where(where).Skip((pageIndex - 1) * pageSize).Take(pageSize).OrderBy(orderBy).ToList();
+            return Db.Set<T>().Where(where).OrderBy(orderBy).Skip((pageIndex - 1) * pageSize).Take(pageSize).AsQueryable();
         }
     }
 }

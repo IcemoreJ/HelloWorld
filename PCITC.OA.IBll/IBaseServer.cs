@@ -20,8 +20,9 @@ namespace PCITC.OA.IBll
 
         bool Updata(T entity);
 
+        bool Updata(List<int> ids);
         bool Delete(T entity);
-
+        bool Delete(List<int> ids);
         T Add(T entity);
         IQueryable<T> GetIQueryableBy(Expression<Func<T, bool>> where);
         /// <summary>
@@ -32,6 +33,6 @@ namespace PCITC.OA.IBll
         /// <param name="where"></param>
         /// <param name="orderBy">排序的类型</param>
         /// <returns></returns>
-        List<T> GetPageList<TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> orderBy);
+        IQueryable<T> GetPageList<TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> orderBy);
     }
 }
