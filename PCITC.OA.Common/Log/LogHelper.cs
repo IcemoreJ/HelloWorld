@@ -28,13 +28,22 @@ namespace PCITC.OA.Common
                             //{    
                             //    item.WriteLog(str);
                             //}
-                            ILog log = LogManager.GetLogger("testLog");
-                            log.Error(str);
+
+                            if (str != null)
+                            {
+                                ILog log = LogManager.GetLogger("testLog");
+                                log.Error(str);
+                            }
+                            else
+                            {
+                                Thread.Sleep(50);
+                            }
+                            
                         }
                     }
                     else
                     {
-                        Thread.Sleep(20);
+                        Thread.Sleep(50);
                     }
                     
                 }

@@ -17,6 +17,8 @@ namespace PCITC.OA.UI.Portal.Controllers
         //IDbSession dbSession = DbSessionFactory.GetCurrentDbSession();
         public ActionResult Index()
         {
+            int a = 0;
+            int b = 1 / a;
             return View();
         }
         [HttpPost]

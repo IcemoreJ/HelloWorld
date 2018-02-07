@@ -252,6 +252,7 @@
     <Content Include="Content\jquery-easyui-1.4\themes\default\images\tree_icons.png" />
     <Content Include="Content\jquery-easyui-1.4\themes\default\images\validatebox_warning.png" />
     <Content Include="Content\jquery-easyui-1.4\themes\icon.css" />
+    <Content Include="error.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

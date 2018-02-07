@@ -37,7 +37,7 @@ namespace PCITC.OA.UI.Portal.Models
         {
             string exception = filterContext.Exception.ToString();
             LogHelper.WriteLog(exception);
-            filterContext.Result = new RedirectResult("~/HtmlPage.html");
+            filterContext.Result = new RedirectResult("~/error.html");
             filterContext.ExceptionHandled = true;
             base.OnException(filterContext);
         }
