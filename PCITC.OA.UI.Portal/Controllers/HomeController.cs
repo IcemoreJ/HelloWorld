@@ -18,7 +18,14 @@ namespace PCITC.OA.UI.Portal.Controllers
         public ActionResult Index()
         {
             int a = 0;
-            int b = 1 / a;
+            int c = 1;
+            int b = c / a;
+            return View();
+        }
+
+        public ActionResult TestError()
+        {
+            
             return View();
         }
         [HttpPost]

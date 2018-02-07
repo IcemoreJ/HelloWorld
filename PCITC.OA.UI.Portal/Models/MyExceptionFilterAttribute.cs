@@ -33,12 +33,11 @@ namespace PCITC.OA.UI.Portal.Models
 {
     public class MyExceptionFilterAttribute : HandleErrorAttribute
     {
+        public static Queue<Exception> queue = new Queue<Exception>();
         public override void OnException(ExceptionContext filterContext)
         {
-            string exception = filterContext.Exception.ToString();
-            LogHelper.WriteLog(exception);
-            filterContext.Result = new RedirectResult("~/error.html");
-            filterContext.ExceptionHandled = true;
+            queue.Enqueue(filterContext.Exception);
+            filterContext.HttpContext.Response.Redirect("~/error.html");   
             base.OnException(filterContext);
         }
     }

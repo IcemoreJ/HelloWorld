@@ -62,15 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseCache.cs" />
-    <Compile Include="Log\FileLog.cs" />
-    <Compile Include="Log\IBaseLog.cs" />
-    <Compile Include="Log\IFileLog.cs" />
-    <Compile Include="Log\ISqlLog.cs" />
-    <Compile Include="Log\LogHelper.cs" />
     <Compile Include="MemCache.cs" />
     <Compile Include="MyCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Log\SqlLog.cs" />
     <Compile Include="RandomCode\RandomCode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
