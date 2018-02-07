@@ -85,6 +85,7 @@
     <Compile Include="OrderInfo.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ParamClass.cs" />
     <Compile Include="RoleInfo.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -125,6 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="QueryParam\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

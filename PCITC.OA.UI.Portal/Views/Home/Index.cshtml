@@ -50,7 +50,15 @@
                     handler: function () { $('#w').window('open') }
                 }, '-', {
                     iconCls: 'icon-edit',
-                    handler: function () { alert('帮助按钮') }
+                    handler: function () {
+                        var Rows = $('#dg').datagrid('getSelections');
+                        if (Rows.length != 1) {
+                            $.messager.alert('警告', '请选择要修改那一列', 'warning');
+                            return;
+                        }
+                        ToEdit();
+                        $('#e').window('open')
+                    }
                 }, '-', {
                     iconCls: 'icon-save',
                     handler: function () { alert('帮助按钮') }
@@ -111,46 +119,68 @@
             });
         }
 
+        function ToEdit()
+        {
+            var Rows = $('#dg').datagrid('getSelections');
+            var id = Rows[0].Id;
+            $("#e iframe").attr('src', "/Home/Edit?id=" + id);
+        }
+
+        function CloseEdit()
+        {
+            $('#e').panel('close');
+            window.location.href = '/Home/Index';
+        }
 
         $(function () {
             ShowDataGrid();
         })
     </script>
-    <div id="w" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save',tools:'#tt'" style="width:600px;height:400px;padding:10px;">
-        <div style="padding:10px 60px 20px 60px">
-            <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
-                <table cellpadding="5">
-                    @*<tr>
-                        <td>用户Id:</td>
-                        <td><input class="easyui-numberbox" type="text" name="Id" data-options="min:0"></input></td>
-                    </tr>*@
-                    <tr>
-                        <td>用户名:</td>
-                        <td><input class="easyui-textbox" type="text" name="UName" data-options="required:true"></input></td>
-                    </tr>
-                    <tr>
-                        <td>密码:</td>
-                        <td><input class="easyui-textbox" type="password" name="Pwd" data-options="required:true"></input></td>
-                    </tr>
-                    <tr>
-                        <td>昵称:</td>
-                        <td><input class="easyui-textbox" type="text" name="ShowName" data-options="required:true"></input></td>
-                    </tr>
-                    <tr>
-                        <td>有效位:</td>
-                        <td><input class="easyui-textbox" type="text" name="DelFlag" data-options="readonly:true" value="true"></input></td>
-                    </tr>
-                    <tr>
-                        <td>备注:</td>
-                        <td><input class="easyui-textbox" name="Remark" data-options="multiline:true" style="height:60px"></input></td>
-                    </tr>
-                </table>
-                <div style="padding:5px">
-                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">Submit</a>
-                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
-                </div>
-            </form>
-           </div>
+    <div>
+        @using (Ajax.BeginForm())
+    </div>
+    <div id="e" class="easyui-window" title="Modal Window" src="javascript:void(0)" data-options="modal:true,closed:true,iconCls:'icon-save',tools:'#tt'" style="width:700px;height:500px;padding:10px;">
+        <iframe src="javascript:void(0)" style="width:600px;height:400px;padding:10px;"></iframe>
+    </div>
+        <div id="w" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save',tools:'#tt'" style="width:700px;height:600px;padding:10px;">
+            <div style="padding:10px 60px 20px 60px">
+                <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
+                    <table cellpadding="5">
+                        @*<tr>
+                                <td>用户Id:</td>
+                                <td><input class="easyui-numberbox" type="text" name="Id" data-options="min:0"></input></td>
+                            </tr>*@
+                        <tr>
+                            <td>用户名:</td>
+                            <td><input class="easyui-textbox" type="text" name="UName" data-options="required:true"></input></td>
+                        </tr>
+                        <tr>
+                            <td>密码:</td>
+                            <td><input class="easyui-textbox" type="password" name="Pwd" data-options="required:true"></input></td>
+                        </tr>
+                        <tr>
+                            <td>昵称:</td>
+                            <td><input class="easyui-textbox" type="text" name="ShowName" data-options="required:true"></input></td>
+                        </tr>
+                        <tr>
+                            <td>有效位:</td>
+                            <td><input class="easyui-textbox" type="text" name="DelFlag" data-options="readonly:true" value="true"></input></td>
+                        </tr>
+                        <tr>
+                            <td>备注:</td>
+                            <td><input class="easyui-textbox" name="Remark" data-options="multiline:true" style="height:60px"></input></td>
+                        </tr>
+                        <tr hidden>
+                            <td><input class="easyui-textbox" name="SubTime" data-options="required:true" style="height:60px" value=@DateTime.Now.ToLocalTime().ToString()></input></td>
+                            <td><input class="easyui-textbox" name="ModfiedOn" data-options="required:true" style="height:60px" value=@DateTime.Now.ToLocalTime().ToString()></input></td>
+                        </tr>
+                    </table>
+                    <div style="padding:5px">
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">Submit</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
+                    </div>
+                </form>
+            </div>
         </div>
 </body>
 </html>

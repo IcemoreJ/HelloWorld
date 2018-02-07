@@ -17,41 +17,41 @@ namespace PCITC.OA.UI.Portal
     {
         protected void Application_Start()
         {
-            log4net.Config.XmlConfigurator.Configure();
+            //log4net.Config.XmlConfigurator.Configure();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            ThreadPool.QueueUserWorkItem(o =>
-            {
-                while (true)
-                {
-                    if (MyExceptionFilterAttribute.queue.Count > 0)
-                    {
-                        Exception exception = MyExceptionFilterAttribute.queue.Dequeue();
-                        //foreach (IBaseLog item in list)
-                        //{    
-                        //    item.WriteLog(str);
-                        //}
+            //ThreadPool.QueueUserWorkItem(o =>
+            //{
+            //    while (true)
+            //    {
+            //        if (MyExceptionFilterAttribute.queue.Count > 0)
+            //        {
+            //            Exception exception = MyExceptionFilterAttribute.queue.Dequeue();
+            //            //foreach (IBaseLog item in list)
+            //            //{    
+            //            //    item.WriteLog(str);
+            //            //}
 
-                        if (exception != null)
-                        {
-                            ILog log = LogManager.GetLogger("testLog");
-                            log.Error(exception.ToString());
-                        }
-                        else
-                        {
-                            Thread.Sleep(50);
-                        }
-                    }
-                    else
-                    {
-                        Thread.Sleep(50);
-                    }
+            //            if (exception != null)
+            //            {
+            //                ILog log = LogManager.GetLogger("testLog");
+            //                log.Error(exception.ToString());
+            //            }
+            //            else
+            //            {
+            //                Thread.Sleep(50);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            Thread.Sleep(50);
+            //        }
 
-                }
-            });
+            //    }
+            //});
         }
     }
 }

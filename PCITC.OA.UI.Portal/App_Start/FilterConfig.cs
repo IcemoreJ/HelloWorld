@@ -8,8 +8,8 @@ namespace PCITC.OA.UI.Portal
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            //filters.Add(new HandleErrorAttribute());
-            filters.Add(new MyExceptionFilterAttribute());
+            filters.Add(new HandleErrorAttribute());
+            //filters.Add(new MyExceptionFilterAttribute());
             filters.Add(new MyActionFilterAttribute { Flag = true });
         }
     }

@@ -17,15 +17,6 @@ namespace PCITC.OA.UI.Portal.Controllers
         //IDbSession dbSession = DbSessionFactory.GetCurrentDbSession();
         public ActionResult Index()
         {
-            int a = 0;
-            int c = 1;
-            int b = c / a;
-            return View();
-        }
-
-        public ActionResult TestError()
-        {
-            
             return View();
         }
         [HttpPost]
@@ -33,7 +24,7 @@ namespace PCITC.OA.UI.Portal.Controllers
         {
             int pageSize = int.Parse(Request["rows"] == null ? "10" : Request["rows"]);
             int pageIndex = int.Parse(Request["page"] == null ? "1" : Request["page"]);
-            var pageData = UserInfoServer.GetPageList(pageIndex, pageSize, u => u.Id >= 0, u => u.Id).Select(u => new { u.Id, u.UName, u.Pwd, u.ShowName, u.Remark, u.DelFlag }).ToList();
+            var pageData = UserInfoServer.GetPageList(pageIndex, pageSize, u => u.DelFlag == true, u => u.Id).Select(u => new { u.Id, u.UName, u.Pwd, u.ShowName, u.Remark, u.DelFlag }).ToList();
             int total = UserInfoServer.GetAll().Count;
 
             //var pageData = UserInfoServer.GetPageList(pageIndex, pageSize, u => u.Id >= 0, u => u.Id).Select(u => new { u.Id, u.UName, u.Pwd, u.ShowName, u.Remark, u.DelFlag });
@@ -87,7 +78,7 @@ namespace PCITC.OA.UI.Portal.Controllers
                 list.Add(int.Parse(item));
             }
 
-            bool flag = UserInfoServer.Delete(list);
+            bool flag = UserInfoServer.Updata(list);
 
             if (flag)
             {
@@ -130,10 +121,10 @@ namespace PCITC.OA.UI.Portal.Controllers
 
             if (flag == false)
             {
-                return HttpNotFound();
+                return Content("NOOK");
             }
 
-            return RedirectToAction("Index");
+            return Content("OK");
         }
 
         #region 
